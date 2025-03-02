@@ -31,7 +31,7 @@ app.get("/",(req,res)=>{
 })
 
 const validateListing = (req,res,next)=>{
-    let {error} = listingSchema = validate(req.body);
+    let {error} = listingSchema.validate(req.body);
     if(error){
         let errMsg = error.details.map((el)=>el.message).join(",");
         throw new ExpressError(400,errMsg);
@@ -40,7 +40,7 @@ const validateListing = (req,res,next)=>{
     }
 }
 const validateReview = (req,res,next)=>{
-    let {error} = reviewSchema = validate(req.body);
+    let {error} = reviewSchema.validate(req.body);
     if(error){
         let errMsg = error.details.map((el)=>el.message).join(",");
         throw new ExpressError(400,errMsg);
@@ -104,7 +104,7 @@ app.post("/listings/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
     await newReview.save();
     await listing.save();
 
-    res.redirect(`/listings/${listings._id}`)
+    res.redirect(`/listings/${listing._id}`)
 }))
 
 app.all("*",(req,res,next)=>{
@@ -113,7 +113,8 @@ app.all("*",(req,res,next)=>{
 
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "error occured" } = err;
-    res.status(statusCode).render("error.ejs",{message});
+    res.status(statusCode).render("error.ejs",{err});
+    console.log(err)
     // res.status(statusCode || 500).send(message || "Internal Server Error");
   });
 
