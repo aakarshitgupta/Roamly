@@ -14,6 +14,7 @@ const listingSchema = new Schema({
     },
     image:{
         url:{
+            default:"https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Ftaj-mahal&psig=AOvVaw1jdqFwFYKGovJSCqAXoEG1&ust=1740906024471000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMif8bzC6IsDFQAAAAAdAAAAABAE",
             type: String,
             set: (v) => v === ""?"https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Ftaj-mahal&psig=AOvVaw1jdqFwFYKGovJSCqAXoEG1&ust=1740906024471000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMif8bzC6IsDFQAAAAAdAAAAABAE" : v,
         }
