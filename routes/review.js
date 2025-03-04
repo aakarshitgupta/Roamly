@@ -17,9 +17,10 @@ const validateReview = (req,res,next)=>{
 }
 
 
-router.post("/",validateReview,wrapAsync(async(req,res)=>{
+router.post("/",wrapAsync(async(req,res)=>{
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review);
+    console.log(req.body);
 
     listing.reviews.push(newReview);
     await newReview.save();
